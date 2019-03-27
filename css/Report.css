@@ -1,0 +1,116 @@
+﻿   /*.dvReport  a {
+    background-color: #2a6496;
+    color: white;
+    padding: 7px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}*/
+   .panel-Report
+   {
+       background-color: #F8F2D9;
+    color: #231e1e;
+    padding: 7px 7px;
+   text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    width:96%;
+    border:1px solid #FFCC01;
+    margin:2%;
+    vertical-align:middle;
+   }
+   table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+    padding-right: 30px;
+    border:1px solid #75755B66;
+    background-color:#fff;
+}
+   .odd
+   {
+       background-color:#fff;
+   }
+
+.datepicker {
+    width: 200px;
+    background: #fff;
+    border: 1px solid #808080;
+}
+
+.RJustify {
+    text-align:right;
+}
+
+.dvReport a,.export
+{
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+     box-sizing: border-box;
+     background-color:#6cd24c !important;
+     text-decoration:none !important;
+      margin-bottom: -40px;
+}
+
+/*fieldset.scheduler-border {
+    width:96%;
+    border:1px solid #FFCC01;
+    margin:2%;
+    padding: 0 10px 10px 10px;
+     background-color: #F8F2D9;
+}
+
+legend.scheduler-border {
+    width: auto !important;
+    border: none;
+    font-size: 14px;
+     background-color: #fbe488;
+    color: #231e1e;
+        border:1px solid #FFCC01;
+        border-bottom:none;
+
+}*/
+
+.SetPos
+{
+     z-index:1000;
+     float:right;
+    /*margin-bottom:-10%;
+  
+   width:10%;*/
+}
+
+#tblVCReport_wrapper  >.col-sm-6
+{
+    width:10%;
+}
+
+#Report .col-lg-3
+{
+     width:19%;
+}
+#Report .col-lg-4
+{
+    width:25%;
+}
+#Report .col-lg-6 {
+    width: 45%;
+}
+#Report  .col-sm-6{
+    width: 42%;
+}
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top {
+    width: 220px;
+}
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom {
+     width: 220px;
+}
