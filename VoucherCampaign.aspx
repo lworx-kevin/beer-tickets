@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/VGC.master" AutoEventWireup="true" CodeFile="VoucherCampaign.aspx.cs" Inherits="VoucherCampaign" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContainer" Runat="Server">
-<%--    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">--%>
-<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContainer" runat="Server">
+    <%--    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-<script  type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
 
-<script  type="text/javascript"  src="js/bootstrap.min.js"></script>
-    <link href="css/editor.css" type="text/css" rel="stylesheet"/>
-   <script type="text/javascript" src="DataTable/jquery-1.12.3.min.js"> </script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link href="css/editor.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="DataTable/jquery-1.12.3.min.js"> </script>
 
     <script src="js/editor.js"></script>
 
@@ -30,31 +30,31 @@
                 </div>
                 <div class="col-sm-8 text-right">
                     <%if (canAdd)
-                      { %>
+                        { %>
                     <button type="button" class="btn btn-primary CreateBtn" onclick="CreateNew();">Create New</button>
 
                     <%} %>
                 </div>
             </div>
-          
+
         </div>
-          <div class="clearfix"></div>
+        <div class="clearfix"></div>
         <div class="panel-body">
             <div class="col-md-12">
                 <table id="tblVoucherCampList" class="table table-bordered table-hover table-condensed table-responsive">
                     <thead>
                         <tr>
-                        <th >Id</th>
+                            <th>Id</th>
                             <th class="col-md-2">Campaign Name</th>
-                            <th class="col-md-1">Code</th>
+                            <th class="col-md-1">Venue</th>
                             <th class="col-md-1">Brand</th>
-                            <th class="col-md-1">Value</th>
+                            <th class="col-md-1">Product</th>
                             <th class="col-md-1">StartDate</th>
                             <th class="col-md-1">EndDate</th>
-                              <th class="col-md-1">DepartDate</th>
-                            <th class="col-md-1">ReturnDate</th>
+                           <%-- <th class="col-md-1">DepartDate</th>
+                            <th class="col-md-1">ReturnDate</th>--%>
                             <th class="col-md-1">Status</th>
-                             <th class="col-md-1">Actions</th>
+                            <th class="col-md-1">Actions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -70,8 +70,8 @@
     </div>
 
 
-    <div id="mdlCreate" class="modal fade" data-id="-1" data-edit ="Add" data-toggle="modal" 
-         role="dialog">
+    <div id="mdlCreate" class="modal fade" data-id="-1" data-edit="Add" data-toggle="modal"
+        role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,63 +90,55 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampBrand">Brand:</label>
+                                    <label class="control-label col-sm-4" for="ddlCampBrand">Brand:</label>
                                     <div class="col-sm-8">
-                                            <select  id="ddlCampBrand"class="select2 form-control" style="width: 100%">
+                                        <select id="ddlCampBrand" class="select2 form-control" style="width: 100%">
                                             <option value="-1">--Select Brand--</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampType">Type:</label>
+                                    <label class="control-label col-sm-4" for="ddlCampType">Venue:</label>
                                     <div class="col-sm-8">
                                         <select id="ddlCampType" class="select2 form-control" style="width: 100%">
+                                            <option value="-1">--Select Venue--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="ddlCampCat">Type:</label>
+                                    <div class="col-sm-8">
+                                        <select id="ddlCampCat" class="select2 form-control" style="width: 100%">
                                             <option value="-1">--Select Type--</option>
                                         </select>
                                     </div>
                                 </div>
-
-                                   <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampCat">Category:</label>
+                                <%--  <div class="form-group">
+                                    <label class="control-label col-sm-4" for="ddlCampFunding">Funding:</label>
                                     <div class="col-sm-8">
-                                             <select id="ddlCampCat" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Category--</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampFunding">Funding:</label>
-                                    <div class="col-sm-8">
-                                         <select id="ddlCampFunding" class="select2 form-control" style="width: 100%">
+                                        <select id="ddlCampFunding" class="select2 form-control" style="width: 100%">
                                             <option value="-1">--Select Funding--</option>
                                         </select>
-
                                     </div>
-                                </div>
-
-                             
-
-                                
-
-
+                                </div>--%>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="txtCampName">Campaign Name:</label>
+                                    <label class="control-label col-sm-4" for="txtCampName">Campaign Name:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" maxlength="100" class="form-control" id="txtCampName"  name="txtCampName" placeholder="Campaign Name" required>
+                                        <input type="text" maxlength="100" class="form-control" id="txtCampName" name="txtCampName" placeholder="Campaign Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCouponVal">Value:</label>
+                                    <label class="control-label col-sm-4" for="ddlCouponVal">Product:</label>
                                     <div class="col-sm-8">
 
-                                         <select id="ddlCouponValue" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Value--</option>
+                                        <select id="ddlCouponValue" class="select2 form-control" style="width: 100%">
+                                            <option value="-1">--Select Product--</option>
                                         </select>
                                     </div>
                                 </div>
-                                  <div class="form-group">
+                                <%--     <div class="form-group">
                                     <label class="control-label col-sm-4" for="ddlInclProduct">Include Product:</label>
                                     <div class="col-sm-8">
                                         <select id="ddlInclProduct" multiple="multiple">
@@ -158,112 +150,109 @@
                                             <option value="6">Option 6</option>
                                         </select>
 
-<%--                                  <input type="text" class="form-control" id="ddlInclProduct" name="ddlInclProduct" placeholder="Inc. product" >--%>
+                                       
                                     </div>
-                                </div>
-                                  <div class="form-group">
+                                </div>--%>
+                                <%--    <div class="form-group">
                                     <label class="control-label col-sm-4" for="ddlExclProduct">Exclude Product:</label>
                                     <div class="col-sm-8">
-                                     <select id="ddlExclProduct" multiple="multiple">
-                                          <%--  <option value="1">Option 1</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                            <option value="4">Option 4</option>
-                                            <option value="5">Option 5</option>
-                                            <option value="6">Option 6</option>--%>
-                                        </select>                         
+                                        <select id="ddlExclProduct" multiple="multiple">
+                                           
+                                        </select>
 
                                     </div>
-                                </div>
-                                  <div class="form-group">
+                                </div>--%>
+                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtStartDate">Start Date:</label>
                                     <div class="col-sm-8">
-                                       <input type="text" class="form-control datepicker" id="txtStartDate" name="txtStartDate" value=""  required />
+                                        <input type="text" class="form-control datepicker" id="txtStartDate" name="txtStartDate" value="" required />
                                     </div>
                                 </div>
 
-                                  <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtEndDate">End Date:</label>
                                     <div class="col-sm-8">
-                                       <input type="text" class="form-control datepicker" id="txtEndDate" name="txtEndDate" value=""  required />
+                                        <input type="text" class="form-control datepicker" id="txtEndDate" name="txtEndDate" value="" required />
                                     </div>
                                 </div>
 
-                                  <div class="form-group">
+                                <%--                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtDepartDate">Departure Date:</label>
                                     <div class="col-sm-8">
-                                       <input type="text" class="form-control datepicker DepartDate" id="txtDepartDate" name="txtDepartDate" value=""  required />
+                                        <input type="text" class="form-control datepicker DepartDate" id="txtDepartDate" name="txtDepartDate" value="" required />
                                     </div>
                                 </div>
 
-                                  <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtReturnDate">Return Date:</label>
                                     <div class="col-sm-8">
-                                       <input type="text" class="form-control datepicker ReturnDate" id="txtReturnDate" name="txtReturnDate" value="2099-12-31"  required />
+                                        <input type="text" class="form-control datepicker ReturnDate" id="txtReturnDate" name="txtReturnDate" value="2099-12-31" required />
                                     </div>
-                                </div>
+                                </div>--%>
 
 
-                                  <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txthtmlEng">htmlEnglish:</label>
                                     <div class="col-sm-8">
-                                        <div id="txtEngEditor"></div>                                    
+                                        <div id="txtEngEditor"></div>
 
                                     </div>
                                 </div>
 
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label col-sm-4" for="txthtmlFr">htmlFrench:</label>
                                     <div class="col-sm-8">
-                                        <div id="txtFrEditor"></div>                                    
+                                        <div id="txtFrEditor"></div>
 
                                     </div>
                                 </div>
 
-                                    <div class="form-group" id="URL">
-                                 <div class="form-group">
-                                    <label class="control-label col-sm-4" for="txtURLENg">URLEnglish:</label>
+                                <div class="form-group" id="URL">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-4" for="txtURLENg">URLEnglish:</label>
+                                        <div class="col-sm-8">
+                                            <label class="control-label col-sm-8" style="text-align: left !important;" id="txtURLENg"></label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-4" for="txtURLFR">URLFrench:</label>
+                                        <label class="control-label col-sm-8" style="text-align: left  !important;" id="txtURLFR"></label>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" id="StatusShow">
+                                    <label class="control-label col-sm-4" for="chkStatus">
+                                        <label id="lblStatusText"></label>
+                                        :</label>
                                     <div class="col-sm-8">
-                                        <label class="control-label col-sm-8" style="text-align:left !important;" id="txtURLENg"></label>
-
-                                    </div>
-                                </div>
-
-                                 <div class="form-group">
-                                    <label class="control-label col-sm-4" for="txtURLFR">URLFrench:</label>
-                                       <label class="control-label col-sm-8" style="text-align:left  !important;"  id="txtURLFR"></label>                                    
-
-                                    </div>
-                                
-                                </div>
-
-                                 <div class="form-group" id="StatusShow">
-                                    <label class="control-label col-sm-4"  for="chkStatus"><label id="lblStatusText" ></label>:</label>
-                                    <div class="col-sm-8">
-<%--                                        <div class="checkbox-container">
+                                        <%--                                        <div class="checkbox-container">
                                             <input type="checkbox" id="on-off-switch" name="chkStatus" checked>
                                         </div>--%>
-                                     
-                                    <div id="lblSwitch" class="make-switch switch-small"  >
-                                        <input type="checkbox" name="chkStatus"  data-on-text="Yes" data-off-text="No" checked />
-                                    </div>
+
+                                        <div id="lblSwitch" class="make-switch switch-small">
+                                            <input type="checkbox" name="chkStatus" data-on-text="Yes" data-off-text="No" checked />
+                                        </div>
                                     </div>
                                 </div>
-                              
-                               
-                                </div>
+
+
                             </div>
+                        </div>
 
 
 
 
                         <div class="modal-footer">
                             <div class="row">
-                                <div  class="col-lg-6">
-                                <label id="lblError" style="padding: 7px;" class="     alert-danger" title=""></label>
+                                <div class="col-lg-6">
+                                    <label id="lblError" style="padding: 7px;" class="     alert-danger" title=""></label>
                                 </div>
-                                 <div class="col-lg-6">
-                                   <button id="btnSubmit" type="button" class="btn btn-default" data-EditId="0" data-id="-1" onclick="SaveEntry();">Save</button>
+                                <div class="col-lg-6">
+                                    <button id="btnSubmit" type="button" class="btn btn-default" data-editid="0" data-id="-1" onclick="SaveEntry();">Save</button>
                                     <button id="btnCancel" type="button" class="btn btn-default" onclick="hideModel()">Cancel</button>
                                 </div>
                             </div>
@@ -277,28 +266,28 @@
     </div>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ctlscript" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ctlscript" runat="Server">
 
     <script src="Pages/VC.js"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
 
 
-            // To delete data entry for coupon type
-            function DeleteEntry(editid) {
-                $("#lblError").hide();
+        // To delete data entry for coupon type
+        function DeleteEntry(editid) {
+            $("#lblError").hide();
          <% if (!canDelete)
         {%>alert("You don't have rights to perform this action."); return false;<%}%>
-                swal({
-                    title: "Are you sure?",
-                    text: "Your will not be able to recover this record!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                },
+            swal({
+                title: "Are you sure?",
+                text: "Your will not be able to recover this record!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
                 function () {
                     var json;
                     $.ajax({
@@ -319,56 +308,57 @@
                 });
 
 
-                $('#mdlCreate .close').click();
-            }
+            $('#mdlCreate .close').click();
+        }
 
 
 
-            // Bind Coupon Type Listing
-            function BindTable() {
+        // Bind Coupon Type Listing
+        function BindTable() {
 
-                $("#tblVoucherCampList").dataTable().fnDestroy();
-                $.ajax({
-                    type: "POST",
-                    url: "VoucherCampaign.aspx/GetVoucherCampaign",
-                    dataType: "json",
-                    data: "{}",
-                    contentType: "application/json; charset=utf-8",
-                    async: true,
-                    cache: false,
-                    success: function (msg) {
-                        $('#tblVoucherCampList').dataTable({
-                            "responsive": true, "autoWidth": false,
-                            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-                            data: JSON.parse(msg.d),
-                            columns: [
-                                  { data: "Id", "visible": false },
-                                  { data: "CampName" },
-                               { data: "Code" },
-                                  { data: "BrandName" },
-                                  { data: "CouponValue" },
-                                  { data: "StartDate" },
-                                  { data: "EndDate" },
-                                  { data: "DepartDate" },
-                                  { data: "ReturnDate" },
-                                   { data: "Status" },
-                                          {
-                                              data: 'Id', "bSearchable": true, "bSortable": true, "mRender": function (data, type, data) {
-                                                  return '<%if (canEdit||canView){%><a href="#" title="View" onclick="EditEntry(' + data.Id + ',1)"><img src="/imgs/icon_portal_view.png" class="actionIcon"/></a>&nbsp;<%}%><%if (canEdit)
-                                      {%><a href="#" title="Edit" onclick="EditEntry(' + data.Id + ',0)"><img src="/imgs/icon_portal_edit.png" class="actionIcon"/></a>&nbsp;<%}%><%if (canAppr)
-                                          {%><a href="#" title="Approve" onclick="ValidateCoupon(' + data.Id + ',2)"><img src="/imgs/Validate.png" class="actionIcon"/></a>&nbsp;<%}%> <%if (canDelete)
-                                          {%><a href="#" title="Delete" onclick="DeleteEntry(' + data.Id + ')"><img src="/imgs/icon_portal_delete.png" class="actionIcon"/></a><%}%> ';
-                                              }
-                                          }
+            $("#tblVoucherCampList").dataTable().fnDestroy();
+            $.ajax({
+                type: "POST",
+                url: "VoucherCampaign.aspx/GetVoucherCampaign",
+                dataType: "json",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                cache: false,
+                success: function (msg) {
+                    $('#tblVoucherCampList').dataTable({
+                        "responsive": true, "autoWidth": false,
+                        "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                        data: JSON.parse(msg.d),
+                        columns: [
+                            { data: "Id", "visible": false },
+                            { data: "CampName" },
+                            { data: "Code" },
+                            { data: "BrandName" },
+                            { data: "CouponValue" },
+                            { data: "StartDate" },
+                            { data: "EndDate" },
+                            //{ data: "DepartDate" },
+                            //{ data: "ReturnDate" },
+                            { data: "Status" },
+                            {
+                                data: 'Id', "bSearchable": true, "bSortable": true, "mRender": function (data, type, data) {
+                                    return '<%if (canEdit || canView)
+        {%><a href="#" title="View" onclick="EditEntry(' + data.Id + ',1)"><img src="/imgs/icon_portal_view.png" class="actionIcon"/></a>&nbsp;<%}%><%if (canEdit)
+        {%><a href="#" title="Edit" onclick="EditEntry(' + data.Id + ',0)"><img src="/imgs/icon_portal_edit.png" class="actionIcon"/></a>&nbsp;<%}%><%if (canAppr)
+        {%><a href="#" title="Approve" onclick="ValidateCoupon(' + data.Id + ',2)"><img src="/imgs/Validate.png" class="actionIcon"/></a>&nbsp;<%}%> <%if (canDelete)
+        {%><a href="#" title="Delete" onclick="DeleteEntry(' + data.Id + ')"><img src="/imgs/icon_portal_delete.png" class="actionIcon"/></a><%}%> ';
+                                }
+                            }
 
-                            ]
+                        ]
 
 
-                        });
-                    }
-                });
-                              }
+                    });
+                }
+            });
+        }
 
-</script>
+    </script>
 </asp:Content>
 

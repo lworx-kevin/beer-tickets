@@ -40,33 +40,23 @@ public class DBStrings
                         Select 'Success' as Status,'1' as Success";
 
     public static string insertVoucherData = @"INSERT INTO [dbo].[VoucherMaster]
-        (				                                    [TypeId]  ,
-				                                    [FundingId]  ,
-				                                    [CategoryId]  ,
-				                                    [BrandId]  ,
-        [CampaignId],
-        [VoucherId]
+        (				                                   
+         [CampaignId]
+        ,[VoucherId]
         ,[FirstName]
         ,[LastName]
-        ,[VoucherAmount]
-        ,[incProduct]
-        ,[exclProduct]
+        ,[VoucherAmount]       
         ,[IssueDate]
         ,[Expirydate]
         ,[Status]
         ,[Created],VoucherValue, FullName)
         VALUES
-        (@TypeId
-	    ,@FundingId
-	    ,@CategoryId
-	    ,@BrandId
-        ,@CampaignId
+        (
+         @CampaignId
         ,@NewVoucherCode
         ,@FirstName
         ,@LastName
-        ,@VoucherAmount
-        ,@IncProduct
-        ,@ExclProduct
+        ,@VoucherAmount  
         ,getdate()
         ,@Expirydate
         ,@Status
@@ -163,6 +153,8 @@ Select VM.id as Id,VoucherId,FirstName,LastName,Email
 
 
     public static string GetCategoryPrefix = "select CC.CouponPrefix from CouponCategory CC inner join VoucherCampaign VC on VC.CategoryId = CC.Id where VC.Id = @CampaignId";
+
+   /// public static string GetCategoryPrefixByCompain = "select CC.CouponPrefix from CouponCategory CC inner join VoucherCampaign VC on VC.CategoryId = CC.Id where VC.Id = @CampaignId";
 
 
 
@@ -280,7 +272,9 @@ update VoucherGeneration set Status = -1 where Id = @GenerationId";
     public static String GetCouponType = "Select Code,Description,Id,Case when Status =0 then 'Pending' else case when status = 1 then 'Approved' end end as Status  from CouponTypes where Status!=-1  order by id desc";
    
     public static String GetCouponTypeById = "select Code,Description,Status from  CouponTypes  where Id = @TypeId";
-   
+
+    public static String GetCouponTypeByCompainId = "select CT.Code,CT.Description,CT.Status from  CouponTypes  as CT inner join VoucherCampaign VC on  VC.TypeId = CT.Id  where  VC.Id= @CampaignId";
+
     public static String DeleteCouponTypeById =	"Update CouponTypes set Status = -1 where Id = @TypeId";
    
     public static String EditCouponType = @"Update CouponTypes set Code = @Code,Description=@Description,Status = 0 where Id = @Id
@@ -608,7 +602,7 @@ else
 begin
 INSERT INTO [dbo].[VoucherCampaign]
 				                                    ([TypeId]  ,
-				                                    [FundingId]  ,
+				                                    
 				                                    [CategoryId]  ,
 				                                    [BrandId]  ,
 				                                    [CampaignName]  ,
@@ -625,7 +619,7 @@ Token,htmlEnglish,htmlFrench
 				                                    )
 				                                    VALUES
 				                                    (@TypeId
-				                                    ,@FundingId
+				                                   
 				                                    ,@CategoryId
 				                                    ,@BrandId
 				                                    ,@CampaignName
@@ -698,7 +692,7 @@ else
 begin
 UPDATE [dbo].[VoucherCampaign]
 				   SET [TypeId] = @TypeId
-					  ,[FundingId] = @FundingId
+					  
 					  ,[CategoryId] = @CategoryId
 					  ,[BrandId] = @BrandId
 					  ,[CampaignName] = @CampaignName

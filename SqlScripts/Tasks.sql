@@ -25,3 +25,8 @@
     ------------------------                  Task 3   -----------------------------------------
 	 update [portal_modules]  set title='Gift Cards' where title='Gift Certificates'
 	 update portal_functions set title='Gift Cards', target='GiftCards.aspx' where title='Gift Certificates' 
+
+	 ------------------------                  Task 4   -----------------------------------------
+	
+    delete from portal_functions where title='Flight Interruption' 
+    delete from portal_functions where title='Marketing Voucher'

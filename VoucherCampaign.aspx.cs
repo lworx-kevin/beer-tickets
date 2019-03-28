@@ -143,10 +143,6 @@ public partial class VoucherCampaign : System.Web.UI.Page
     [WebMethod]
     public static string InsertVoucherCampaign(VoucherCamp VoucherCamp)
     {
-
-        
-
-
         var data = Ddatatable.InsertVoucherCampaign(VoucherCamp);
         HttpContext context = HttpContext.Current;
         context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);

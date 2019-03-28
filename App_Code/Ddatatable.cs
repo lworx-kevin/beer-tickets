@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Dapper;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Newtonsoft.Json;
-using System.Web.Services;
-using System.Reflection;
-using Microsoft.ApplicationBlocks.Data;
-using Dapper;
-using System.Configuration;
-using System.Data.SqlTypes;
+using System.Linq;
+using System.Web;
 
 /// <summary>
 /// Summary description for Ddatatable
@@ -19,14 +15,14 @@ public class Ddatatable
 {
     static IDbConnection db;
 
-	public Ddatatable()
-	{
-        
+    public Ddatatable()
+    {
 
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     public static string getJSON(dynamic Data)
     {
@@ -40,19 +36,19 @@ public class Ddatatable
     public static string InsertCouponTypes(Coupons.CouponType objType)
     {
 
-        
-         #region Audit
-            Audit objAudit = new Audit();
-            objAudit.User = -1;
-            objAudit.Function = "InsertCouponTypes";
-            objAudit.TimeStamp = DateTime.Now;
+
+        #region Audit
+        Audit objAudit = new Audit();
+        objAudit.User = -1;
+        objAudit.Function = "InsertCouponTypes";
+        objAudit.TimeStamp = DateTime.Now;
         #endregion
-         try
+        try
         {
             var result = "[]";
             if (objType.Id > 0 && objType.Action.ToString().ToLower() == "edit")
             {
-               
+
 
                 string EditCouponType = DBStrings.EditCouponType;
                 result = db.Query<String>(EditCouponType, new
@@ -61,28 +57,28 @@ public class Ddatatable
                     Description = objType.Description,
                     Id = objType.Id
                 }).First();
-                objAudit.Text = "Existing coupon type has been edited by user. Edited CouponTypeId="+objType.Id;
+                objAudit.Text = "Existing coupon type has been edited by user. Edited CouponTypeId=" + objType.Id;
             }
             else if (objType.Id > 0 && objType.Action.ToString().ToLower() == "validate")
             {
                 string ValidateCouponType = DBStrings.ValidateCouponType;
-                 result = db.Query<String>(ValidateCouponType, new
+                result = db.Query<String>(ValidateCouponType, new
                 {
                     Status = objType.Status,
                     Id = objType.Id
                 }).First();
-                 objAudit.Text = "Existing coupon type has been validated by user. Validated CouponTypeId=" + objType.Id;
+                objAudit.Text = "Existing coupon type has been validated by user. Validated CouponTypeId=" + objType.Id;
 
             }
-             else
+            else
             {
                 string InsertCouponType = DBStrings.InsertCouponType;
                 result = db.Query<String>(InsertCouponType, new
                 {
-                   Code =  objType.Code,
-                   Description =  objType.Description,
-                   Status =  objType.Status,
-                  Created =   DateTime.Now
+                    Code = objType.Code,
+                    Description = objType.Description,
+                    Status = objType.Status,
+                    Created = DateTime.Now
                 }).First();
                 objAudit.Text = "New coupon type has been added by user";
 
@@ -111,7 +107,7 @@ public class Ddatatable
             var data = (List<Coupons.CouponType>)db.Query<Coupons.CouponType>(GetCouponType);
             return getJSON(data);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return getJSON("Failure");
 
@@ -140,7 +136,7 @@ public class Ddatatable
         Audit objAudit = new Audit();
         objAudit.User = -1;
         objAudit.Function = "DeleteCouponTypeById";
-        objAudit.Text = "Existing Coupon Type has been deleted by user.Deleted TypeId= "+ TypeId;
+        objAudit.Text = "Existing Coupon Type has been deleted by user.Deleted TypeId= " + TypeId;
         #endregion
 
         try
@@ -238,7 +234,7 @@ public class Ddatatable
         try
         {
             Initialize();
-            String GetCouponValue= DBStrings.GetCouponValue;
+            String GetCouponValue = DBStrings.GetCouponValue;
             var data = (List<Coupons.CouponValue>)db.Query<Coupons.CouponValue>(GetCouponValue);
             return getJSON(data);
         }
@@ -389,7 +385,7 @@ public class Ddatatable
             }
             else if (objFund.Id > 0 && objFund.Action.ToString().ToLower() == "validate")
             {
-              
+
                 string ValidateCouponFundingData = DBStrings.ValidateCouponFundingData;
                 result = db.Query<String>(ValidateCouponFundingData, new
                 {
@@ -787,25 +783,25 @@ public class Ddatatable
                 result = db.Query<String>(EditCouponProductType, new
                 {
 
-                                              ProductCode= objProduct.ProductCode,
-                        ProductType=  objProduct.ProductType,
-                        dbUser= objProduct.dbUser,
-                       dbPwd= objProduct.dbPwd,
-                        dbName= objProduct.dbName,
-                        dbTable= objProduct.dbTable,
-                        dbProductCode= objProduct.dbProductCode,
-                        dbProductName=objProduct.dbProductName,
-                        dbHotelName= objProduct.dbHotelName,
-                        dbHotelChain= objProduct.dbHotelChain,
-                        dbFlightNumber= objProduct.dbFlightNumber,
-                        dbAirlineName= objProduct.dbAirlineName,
-                        dbCountryCode= objProduct.dbCountryCode,
-                        dbAirportCode= objProduct.dbAirportCode,
-                        dbStatusCode= objProduct.dbStatusCode,
-                                              DBStatusValue = objProduct.dbStatusValue,
-                            Status= objProduct.Status,
-                            Id= objProduct.Id,
-                            Action= objProduct.Action
+                    ProductCode = objProduct.ProductCode,
+                    ProductType = objProduct.ProductType,
+                    dbUser = objProduct.dbUser,
+                    dbPwd = objProduct.dbPwd,
+                    dbName = objProduct.dbName,
+                    dbTable = objProduct.dbTable,
+                    dbProductCode = objProduct.dbProductCode,
+                    dbProductName = objProduct.dbProductName,
+                    dbHotelName = objProduct.dbHotelName,
+                    dbHotelChain = objProduct.dbHotelChain,
+                    dbFlightNumber = objProduct.dbFlightNumber,
+                    dbAirlineName = objProduct.dbAirlineName,
+                    dbCountryCode = objProduct.dbCountryCode,
+                    dbAirportCode = objProduct.dbAirportCode,
+                    dbStatusCode = objProduct.dbStatusCode,
+                    DBStatusValue = objProduct.dbStatusValue,
+                    Status = objProduct.Status,
+                    Id = objProduct.Id,
+                    Action = objProduct.Action
                 }).First();
                 objAudit.Text = "Existing coupon product type has been edited by user. Edited CouponProductTypeId=" + objProduct.Id;
             }
@@ -865,7 +861,7 @@ public class Ddatatable
 
     #endregion
 
-    
+
 
     #region Coupon Brands
     public static string GetCouponBrands()
@@ -1012,13 +1008,13 @@ public class Ddatatable
     public static string InsertVoucher(Voucher objData)
     {
         #region Audit
-            Audit objAudit = new Audit();
-            objAudit.User = -1;
-            objAudit.Function = "InsertVoucher";
-            objAudit.Text = "New voucher has been added by user";
-            objAudit.TimeStamp = DateTime.Now;
+        Audit objAudit = new Audit();
+        objAudit.User = -1;
+        objAudit.Function = "InsertVoucher";
+        objAudit.Text = "New voucher has been added by user";
+        objAudit.TimeStamp = DateTime.Now;
         #endregion
-         try
+        try
         {
 
             if (objData.Id > 0 && objData.Action.ToString().ToLower() == "edit")
@@ -1028,28 +1024,28 @@ public class Ddatatable
                 {
                     Id = objData.Id,
 
-                    TypeId = objData.CouponTypeId,
+                    //TypeId = objData.CouponTypeId,
                     CampaignId = objData.CampaignId,
-                    FundingId = objData.CouponFundingId,
+                    //FundingId = objData.CouponFundingId,
 
-                    CategoryId = objData.CouponCatId,
-                    BrandId = objData.CouponBrandId,
-                  
+                    //CategoryId = objData.CouponCatId,
+                    //BrandId = objData.CouponBrandId,
+
                     objData.FirstName,
                     objData.LastName,
                     objData.VoucherAmount,
-                    objData.IncProduct,
-                    objData.ExclProduct,
-                   
+                    //objData.IncProduct,
+                    // objData.ExclProduct,
+
                     objData.ExpiryDate,
                     objData.Status
-                    
-                    
+
+
                 });
                 objAudit.Text = "Existing voucher  has been edited by user. Edited VoucherId=" + objData.Id;
 
             }
-              
+
             else if (objData.Id > 0 && objData.Action.ToString().ToLower() == "validate")
             {
                 string ValidateVoucherData = DBStrings.ValidateVoucherData;
@@ -1067,21 +1063,22 @@ public class Ddatatable
                 string insertVoucherData = DBStrings.insertVoucherData;
                 #region Get Campaign Category Prefix
                 String GetCategoryPrefix = DBStrings.GetCategoryPrefix;
-                String GetCategoryPrefixByCategoryId = DBStrings.GetCategoryPrefixByCategoryId;
+                //DBStrings.GetCategoryPrefix;
+                //String GetCategoryPrefixByCategoryId = DBStrings.GetCategoryPrefixByCategoryId;
                 String CouponPrefix = "";
 
-                CouponPrefix = db.Query<String>(GetCategoryPrefixByCategoryId, new
-            {
-                CategoryId = objData.CouponCatId
-            }).Single();
+                CouponPrefix = db.Query<String>(GetCategoryPrefix, new
+                {
+                    CampaignId = objData.CampaignId
+                }).Single();
 
                 #endregion
 
                 #region Coupon Types
-                string GetTypeDescById = DBStrings.GetCouponTypeById;
+                string GetTypeDescById = DBStrings.GetCouponTypeByCompainId;
                 string TypeDesc = db.Query<String>(GetTypeDescById, new
                 {
-                    TypeId = objData.CouponTypeId
+                    CampaignId = objData.CampaignId
                 }).Single();
                 #endregion
 
@@ -1137,7 +1134,7 @@ public class Ddatatable
                         Int32.TryParse(NewPrefix, out INPrefix);
                         Int32.TryParse(RandomNumb, out IRandomNum);
                         String DigitCode = (((INPrefix + IRandomNum) / INPrefix) % 100).ToString();
-                        NewVoucherCode = NewPrefix + RandomNumb + DigitCode; 
+                        NewVoucherCode = NewPrefix + RandomNumb + DigitCode;
 
                         String InsertVoucher = DBStrings.InsertVoucher;
                         String data = db.Query<String>(InsertVoucher, new { NewVoucherCode = NewVoucherCode }).Single();
@@ -1145,30 +1142,26 @@ public class Ddatatable
                     }
                 }
                 #endregion
-
-
-
-
                 DateTime Created = DateTime.Now;
                 DateTime IssueDate = DateTime.Now;
 
                 var result = db.Execute(insertVoucherData, new
                 {
                     CampaignId = objData.CampaignId,
-                    TypeId = objData.CouponTypeId
-                          ,
-                    FundingId = objData.CouponFundingId
-                          ,
-                    CategoryId = objData.CouponCatId
-                          ,
-                    BrandId = objData.CouponBrandId
-                    ,
+                    //TypeId = objData.CouponTypeId
+                    // ,
+                    //FundingId = objData.CouponFundingId
+                    //     ,
+                    // CategoryId = objData.CouponCatId
+                          //,
+                    // BrandId = objData.CouponBrandId
+                    // ,
                     NewVoucherCode,
                     objData.FirstName,
                     objData.LastName,
                     objData.VoucherAmount,
-                    objData.IncProduct,
-                    objData.ExclProduct,
+                    // objData.IncProduct,
+                    // objData.ExclProduct,
                     IssueDate,
                     objData.ExpiryDate,
                     objData.Status,
@@ -1176,10 +1169,6 @@ public class Ddatatable
                 });
 
             }
-
-
-
-
             objAudit.Status = "Success";
             InsertAuditLog(objAudit);
             return getJSON("Success");
@@ -1252,7 +1241,7 @@ public class Ddatatable
     #endregion
 
     #region Vouchers With Campaign
-    public static string GetVCouponsListing( Int32 Id)
+    public static string GetVCouponsListing(Int32 Id)
     {
         Initialize();
         String GetVCouponsListing = DBStrings.GetVCouponsListing;
@@ -1340,21 +1329,21 @@ public class Ddatatable
 
                         VoucherId = db.Query<String>(insertCouponGnerationData, new
                         {
-                        generation_id  = ReturnGenId,
+                            generation_id = ReturnGenId,
 
-                        campaign_id =objVData.Campaign,
+                            campaign_id = objVData.Campaign,
 
-                        email  = GD.Email,
+                            email = GD.Email,
 
-                        firstname = GD.FirstName,
+                            firstname = GD.FirstName,
 
-                        lastname =GD.LastName,
+                            lastname = GD.LastName,
 
-                        status = 0,
-                        distribution = 0,
-                        distributed =0
+                            status = 0,
+                            distribution = 0,
+                            distributed = 0
 ,
-                        
+
                         }).FirstOrDefault();
                         #endregion
 
@@ -1476,7 +1465,7 @@ public class Ddatatable
 
     }
 
-    public static string EditGenerateCouponData(CouponGeneration  objVData)
+    public static string EditGenerateCouponData(CouponGeneration objVData)
     {
         String VoucherId = "0";
         #region Audit
@@ -1491,20 +1480,20 @@ public class Ddatatable
         {
 
 
-                #region Insert Voucher Geneartion Data
+            #region Insert Voucher Geneartion Data
             String EditGenerateCouponData = DBStrings.EditGenerateCouponData;
 
             var ReturnGenId = db.Query<String>(EditGenerateCouponData, new
-                {
-                    Id = objVData.Id,
-                    FirstName = objVData.FirstName,
-                    LastName = objVData.LastName,
-                    Email = objVData.Email
+            {
+                Id = objVData.Id,
+                FirstName = objVData.FirstName,
+                LastName = objVData.LastName,
+                Email = objVData.Email
 
-                }).FirstOrDefault();
-                #endregion
+            }).FirstOrDefault();
+            #endregion
 
-       
+
 
 
 
@@ -1549,7 +1538,7 @@ public class Ddatatable
 
     }
 
-    
+
 
     #endregion
 
@@ -1709,14 +1698,12 @@ public class Ddatatable
             var result = "[]";
             if (objData.Id > 0 && objData.Action.ToString().ToLower() == "edit")
             {
-
-
                 string EditVoucherCampaignById = DBStrings.EditVoucherCampaignById;
                 result = db.Query<String>(EditVoucherCampaignById, new
                 {
                     TypeId = objData.CouponTypeId
-                      ,
-                    FundingId = objData.CouponFundingId
+                    //  ,
+                    //FundingId = null //objData.CouponFundingId
                       ,
                     CategoryId = objData.CouponCatId
                       ,
@@ -1750,8 +1737,8 @@ public class Ddatatable
                 {
                     TypeId = objData.CouponTypeId
                       ,
-                    FundingId = objData.CouponFundingId
-                      ,
+                    //FundingId = objData.CouponFundingId
+                    // ,
                     CategoryId = objData.CouponCatId
                       ,
                     BrandId = objData.CouponBrandId
@@ -1785,8 +1772,8 @@ public class Ddatatable
                 result = db.Query<String>(InsertVoucherCampaignData, new
                 {
                     TypeId = objData.CouponTypeId
-                      ,
-                    FundingId = objData.CouponFundingId
+                    //  ,
+                    //FundingId = objData.CouponFundingId
                       ,
                     CategoryId = objData.CouponCatId
                       ,
@@ -1962,7 +1949,7 @@ public class Ddatatable
                     objData.Status,
                     BrandId = objData.CampaignBrandId
                 });
-                 objAudit.Text = "Existing GC  has been edited by user. Edited VoucherId=" + objData.Id;
+                objAudit.Text = "Existing GC  has been edited by user. Edited VoucherId=" + objData.Id;
 
             }
             else if (objData.Id > 0 && objData.Action.ToString().ToLower() == "validate")
@@ -1973,7 +1960,7 @@ public class Ddatatable
 
                 var result = db.Execute(ValidateCertificateData, new
                 {
-                    
+
                     objData.Status,
                     objData.Id
                 });
@@ -2061,7 +2048,7 @@ public class Ddatatable
                         Int32.TryParse(NewPrefix, out INPrefix);
                         Int32.TryParse(RandomNumb, out IRandomNum);
                         String DigitCode = (((INPrefix + IRandomNum) / INPrefix) % 100).ToString();
-                        NewCertificateCode = NewPrefix + RandomNumb + DigitCode ; 
+                        NewCertificateCode = NewPrefix + RandomNumb + DigitCode;
 
 
                         String InsertCertificate = DBStrings.InsertCertificate;
@@ -2173,22 +2160,22 @@ public class Ddatatable
         db = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
     }
 
-    
+
     public static void InsertAuditLog(Audit objAudit)
     {
         try
         {
             Initialize();
-           
+
             Int32 UserId = -1;
             Int32.TryParse(HttpContext.Current.Session["UserId"].ToString(), out UserId);
             objAudit.User = UserId;
             objAudit.TimeStamp = DateTime.Now;
             String InsertAudit = DBStrings.InsertAudit;
-            db.Query<String>(InsertAudit, new { User = objAudit.User,Function = objAudit.Function,Text = objAudit.Text,TimeStamp = objAudit.TimeStamp,Status = objAudit.Status }).DefaultIfEmpty().ToString();
-            
+            db.Query<String>(InsertAudit, new { User = objAudit.User, Function = objAudit.Function, Text = objAudit.Text, TimeStamp = objAudit.TimeStamp, Status = objAudit.Status }).DefaultIfEmpty().ToString();
+
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw ex;
         }
@@ -2197,11 +2184,11 @@ public class Ddatatable
 
     public class Audit
     {
-     public   Int32 User {get;set;}
-     public String Function { get; set; }
-     public String Text { get; set; }
-     public DateTime TimeStamp { get; set; }
-     public String Status { get; set; }
+        public Int32 User { get; set; }
+        public String Function { get; set; }
+        public String Text { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public String Status { get; set; }
 
     }
     #endregion
@@ -2219,7 +2206,7 @@ public class Ddatatable
         Initialize();
         try
         {
-            String DeleteUser= DBStrings.DeleteUser;
+            String DeleteUser = DBStrings.DeleteUser;
             db.Query<String>(DeleteUser, new { UserId = UserId }).DefaultIfEmpty().ToString();
             objAudit.Status = "Success";
             InsertAuditLog(objAudit);
@@ -2378,7 +2365,7 @@ public class Ddatatable
     }
 
 
- 
+
     #endregion
 
     #endregion

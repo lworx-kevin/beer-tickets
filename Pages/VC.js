@@ -1,13 +1,7 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#txtEngEditor").Editor();
-    $("#txtFrEditor").Editor();
-
-   
+    $("#txtFrEditor").Editor();   
 });
-
-
 //When CreateNew is Clicked
 function CreateNew(editid, view) {
 
@@ -37,11 +31,10 @@ function CreateNew(editid, view) {
 
 
     $("#ddlCampType").val(0).trigger('change');
-    $("#ddlCampFunding").val(0).trigger('change');
+
     $("#ddlCampCat").val(0).trigger('change');
     $("#ddlCampType").val(0).trigger('change');
-    $("#ddlInclProduct").multiselect('refresh');
-    $("#ddlExclProduct").multiselect('refresh');
+
     $('#mdlCreate').modal('show');
 }
 
@@ -81,7 +74,7 @@ function ValidateCoupon(editid, view) {
 
 
             $("#ddlCampType").val(json[0].CouponTypeId).trigger('change');
-            $("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
+            //$("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
             $("#ddlCampCat").val(json[0].CouponCatId).trigger('change');
             $("#ddlCampBrand").val(json[0].CouponBrandId).trigger('change');
             $("#ddlCouponValue").val(json[0].CouponValue).trigger('change');
@@ -89,8 +82,8 @@ function ValidateCoupon(editid, view) {
             //$("#txtCampVal").val(json[0].CampValue);
             $("#txtStartDate").val(json[0].StartDate);
             $("#txtEndDate").val(json[0].EndDate)
-            $("#txtDepartDate").val(json[0].DepartDate);
-            $("#txtReturnDate").val(json[0].ReturnDate)
+            //$("#txtDepartDate").val(json[0].DepartDate);
+            //$("#txtReturnDate").val(json[0].ReturnDate)
             $("#txtEngEditor").Editor("setText", json[0].htmlEnglish);
             $("#txtFrEditor").Editor("setText", json[0].htmlFrench);
             $("#txtURLENg").text(json[0].URLEnglish);
@@ -102,20 +95,9 @@ function ValidateCoupon(editid, view) {
             var InclProduct = json[0].InclProduct;
             var ExclProduct = json[0].ExclProduct;
 
-            //Make an array
-
-            var Incdataarray = InclProduct.split(",");
-            var Excdataarray = ExclProduct.split(",");
+            //Make an array   
 
             // Set the value
-
-            $("#ddlInclProduct").val(Incdataarray);
-            $("#ddlExclProduct").val(Excdataarray);
-            // Then refresh
-            $("#ddlInclProduct").val(Incdataarray);
-            $("#ddlExclProduct").val(Excdataarray);
-            $("#ddlInclProduct").multiselect("refresh");
-            $("#ddlExclProduct").multiselect("refresh");
 
 
             $("[name='chkStatus']").bootstrapSwitch('state', json[0].Status == '1' ? true : false);
@@ -157,7 +139,7 @@ function EditEntry(editid, view) {
 
 
             $("#ddlCampType").val(json[0].CouponTypeId).trigger('change');
-            $("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
+            //$("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
             $("#ddlCampCat").val(json[0].CouponCatId).trigger('change');
             $("#ddlCampBrand").val(json[0].CouponBrandId).trigger('change');
             $("#ddlCouponValue").val(json[0].CouponValue).trigger('change');
@@ -166,8 +148,8 @@ function EditEntry(editid, view) {
             //$("#txtCampVal").val(json[0].CampValue);
             $("#txtStartDate").val(json[0].StartDate);
             $("#txtEndDate").val(json[0].EndDate);
-            $("#txtDepartDate").val(json[0].DepartDate);
-            $("#txtReturnDate").val(json[0].ReturnDate);
+            //$("#txtDepartDate").val(json[0].DepartDate);
+           // $("#txtReturnDate").val(json[0].ReturnDate);
             $("#txtEngEditor").Editor("setText", json[0].htmlEnglish);
             $("#txtFrEditor").Editor("setText", json[0].htmlFrench);
             $("#txtURLENg").text(json[0].URLEnglish);
@@ -183,13 +165,7 @@ function EditEntry(editid, view) {
 
             // Set the value
 
-            $("#ddlInclProduct").val(Incdataarray);
-            $("#ddlExclProduct").val(Excdataarray);
-            // Then refresh
-            $("#ddlInclProduct").val(Incdataarray);
-            $("#ddlExclProduct").val(Excdataarray);
-            $("#ddlInclProduct").multiselect("refresh");
-            $("#ddlExclProduct").multiselect("refresh");
+       
 
 
             $("[name='chkStatus']").bootstrapSwitch('state', json[0].Status == '1' ? true : false);
@@ -241,48 +217,16 @@ function BindMultiSelect() {
             json = JSON.parse(msg.d);
             $b.empty();
 
-
-
             for (var i = 0; i < json.length ; i++) {
                 $b.append("<option value=" + json[i].Id + ">" + json[i].ProductName + "</option>").trigger('change');
             }
             $b.multiselect('rebuild');
 
-            //$b.append("<option value=0>--Select Product--</option>");
-            //for (var i = 0; i < json.length ; i++) {
-            //    $b.append("<li value=" + json[i].Id + ">" + json[i].ProductName + "</li>").trigger('change');
-            // }
+            
         }
     });
 
-    var $ab = $('#ddlInclProduct');
-    $.ajax({
-        type: "POST",
-        url: "VoucherCampaign.aspx/GetCouponProductData",
-        dataType: "json",
-        data: "{}",
-        contentType: "application/json; charset=utf-8",
-        async: true,
-        cache: false,
-        success: function (msg) {
-
-            json = JSON.parse(msg.d);
-            $ab.empty();
-
-
-
-            for (var i = 0; i < json.length ; i++) {
-                $ab.append("<option value=" + json[i].Id + ">" + json[i].ProductName + "</option>").trigger('change');
-            }
-            $ab.multiselect('rebuild');
-
-            //$b.append("<option value=0>--Select Product--</option>");
-            //for (var i = 0; i < json.length ; i++) {
-            //    $b.append("<li value=" + json[i].Id + ">" + json[i].ProductName + "</li>").trigger('change');
-            // }
-        }
-    });
-
+  
 }
 
 //When cancel is Clicked
@@ -292,7 +236,7 @@ function hideModel() {
 }
 // To save data entry for coupon type
 function SaveEntry() {
-    
+    debugger;
     $("#lblError").hide();
     //waitingDialog.show("Saving  Data Please Wait..");
     $.ajaxSetup({
@@ -301,10 +245,10 @@ function SaveEntry() {
 
     var StartDate = $("#txtStartDate").val();
     var EndDate = $("#txtEndDate").val();
-    var DepartDate = $("#txtDepartDate").val();
-    var ReturnDate = $("#txtReturnDate").val();
+    var DepartDate = '';//$("#txtDepartDate").val(); here 
+    var ReturnDate = '';//$("#txtReturnDate").val(); here 
     var CouponType = $("#ddlCampType").val();
-    var CouponFunding = $("#ddlCampFunding").val();
+    //var CouponFunding = 26;//$("#ddlCampFunding").val();
     var CouponCat = $("#ddlCampCat").val();
     var CouponBrand = $("#ddlCampBrand").val();
     var CampName = $("#txtCampName").val();
@@ -315,8 +259,10 @@ function SaveEntry() {
 
     //var CampValue = $("#txtCampVal").val();
     var Status = $('#lblStatusText').text() == 'Approved' && $("[name='chkStatus']").prop('checked') == true ? 1 : 0;
-    var InclProduct = $("#ddlInclProduct").val() == null ? 0 : $("#ddlInclProduct").val();
-    var ExclProduct = $("#ddlExclProduct").val() == null ? 0 : $("#ddlExclProduct").val();
+    var InclProduct = 0;// here 
+        //$("#ddlInclProduct").val() == null ? 0 : $("#ddlInclProduct").val();
+    var ExclProduct = 0; // here 
+        //$("#ddlExclProduct").val() == null ? 0 : $("#ddlExclProduct").val(); 
 
 
 
@@ -324,7 +270,6 @@ function SaveEntry() {
     if (Validate()) {
         var url = '';
         if (Action == 'validate') {
-
             url = 'VoucherCampaign.aspx/InsertVoucherCampaign';
             var VoucherCamp = {
                 'StartDate': StartDate,
@@ -332,7 +277,7 @@ function SaveEntry() {
                 'DepartDate': DepartDate,
                 'ReturnDate': ReturnDate,
                 'CouponTypeId': CouponType,
-                'CouponFundingId': CouponFunding,
+                //'CouponFundingId': CouponFunding, //here 
                 'CouponCatId': CouponCat,
                 'CouponBrandId': CouponBrand,
                 'CampName': CampName,
@@ -345,11 +290,6 @@ function SaveEntry() {
                 'htmlEnglish': htmlEnglish,
                 'htmlFrench': htmlFrench
             }
-
-
-
-
-
         }
         else if (Action == 'edit') {
 
@@ -361,7 +301,7 @@ function SaveEntry() {
                 'ReturnDate': ReturnDate,
 
                 'CouponTypeId': CouponType,
-                'CouponFundingId': CouponFunding,
+                //'CouponFundingId': CouponFunding,
                 'CouponCatId': CouponCat,
                 'CouponBrandId': CouponBrand,
                 'CampName': CampName,
@@ -374,11 +314,6 @@ function SaveEntry() {
                 'htmlEnglish': htmlEnglish,
                 'htmlFrench': htmlFrench
             }
-
-
-
-
-
         }
 
 
@@ -393,7 +328,7 @@ function SaveEntry() {
                 'ReturnDate': ReturnDate,
 
                 'CouponTypeId': CouponType,
-                'CouponFundingId': CouponFunding,
+                //'CouponFundingId': CouponFunding,
                 'CouponCatId': CouponCat,
                 'CouponBrandId': CouponBrand,
                 'CampName': CampName,
@@ -472,7 +407,9 @@ function Validate() {
 
 
 
-    if (CampName.toString().trim() == '' || $("#ddlCampType").val() <= 0 || $("#ddlCampFunding").val() <= 0 || $("#ddlCampCat").val() <= 0 || $("#ddlCampBrand").val() <= 0 || $("#ddlCouponValue").val() <= 0) {
+    if (CampName.toString().trim() == '' || $("#ddlCampType").val() <= 0 //|| //$("#ddlCampFunding").val() <= 0 here 
+
+        || $("#ddlCampCat").val() <= 0 || $("#ddlCampBrand").val() <= 0 || $("#ddlCouponValue").val() <= 0) {
         $("#lblError").show();
         return false;
     }
@@ -505,46 +442,6 @@ $(document).ready(function () {
     BindDropdown();
     BindMultiSelect();
 
-
-
-    //$('#ddlInclProduct').multiselect();
-    //$('#ddlExclProduct').multiselect();
-
-
-    $('#ddlInclProduct').multiselect({
-        includeSelectAllOption: true,
-        enableCaseInsensitiveFiltering: true,
-        enableFiltering: true,
-        onChange: function (element, checked) {
-            var brands = $('#ddlInclProduct option:selected');
-            var selection = [];
-
-            $(brands).each(function (index, pro) {
-                selection.push(pro);
-            });
-
-
-
-        }
-    });
-
-    $('#ddlExclProduct').multiselect({
-        includeSelectAllOption: true,
-        enableCaseInsensitiveFiltering: true,
-        enableFiltering: true,
-        onChange: function (element, checked) {
-            var brands = $('#ddlExclProduct option:selected');
-            var selection = [];
-            $(brands).each(function (index, pro) {
-                selection.push(pro);
-            });
-
-
-        }
-    });
-
-
-    //Bind Coupon 
 
 
 });
@@ -613,24 +510,26 @@ function BindDropdown() {
 
 
     //Bind Coupon Funding
-    $bb = $("#ddlCampFunding");
-    $.ajax({
-        type: "POST",
-        url: "VoucherCampaign.aspx/GetCouponFundingData",
-        dataType: "json",
-        data: "{}",
-        contentType: "application/json; charset=utf-8",
-        async: true,
-        cache: false,
-        success: function (msg) {
-            json = JSON.parse(msg.d);
-            $bb.empty();
-            $bb.append("<option value=0>--Select Funding--</option>");
-            for (var i = 0; i < json.length ; i++) {
-                $bb.append("<option value=" + json[i].Id + ">" + json[i].Department + "</option>").trigger('change');
-            }
-        }
-    });
+    //$bb = $("#ddlCampFunding");
+
+
+    //$.ajax({
+    //    type: "POST",
+    //    url: "VoucherCampaign.aspx/GetCouponFundingData",
+    //    dataType: "json",
+    //    data: "{}",
+    //    contentType: "application/json; charset=utf-8",
+    //    async: true,
+    //    cache: false,
+    //    success: function (msg) {
+    //        json = JSON.parse(msg.d);
+    //      //  $bb.empty();
+    //       // $bb.append("<option value=0>--Select Funding--</option>");
+    //        //for (var i = 0; i < json.length ; i++) {
+    //          //  $bb.append("<option value=" + json[i].Id + ">" + json[i].Department + "</option>").trigger('change');
+    //       // }
+    //    }
+    //});
 
 
     //Bind Coupon Category

@@ -70,9 +70,6 @@ public partial class Vouchers : System.Web.UI.Page
     public static string InsertVoucher(Voucher Voucher)
     {
 
-
-
-
         //send id=0 for all data
         //var data = BAL.Select_Brands(0);
         var data = Ddatatable.InsertVoucher(Voucher);
