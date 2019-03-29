@@ -37,7 +37,7 @@
                             <th class="col-md-2">Voucher Id</th>
                             <th class="col-md-2">First Name</th>
                             <th class="col-md-2">Last Name</th>
-                            <th class="col-md-2">Voucher Amount</th>
+                            <th class="col-md-2">Product</th>
                             <th class="col-md-1">Status</th>
                             <th class="col-md-1">Actions</th>
                         </tr>
@@ -82,45 +82,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <%-- <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampBrand">Brand:</label>
-                                    <div class="col-sm-8">
-                                            <select  id="ddlCampBrand"class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Brand--</option>
-                                        </select>
-                                    </div>
-                                </div>--%>
-                                <%-- <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampType"> Type:</label>
-                                    <div class="col-sm-8">
-                                        <select id="ddlCampType" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Type--</option>
-                                        </select>
-                                    </div>
-                                </div>--%>
-
-                                <%--                                   <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampCat"> Category:</label>
-                                    <div class="col-sm-8">
-                                             <select id="ddlCampCat" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Category--</option>
-                                        </select>
-                                    </div>
-                                </div>--%>
-
-                                <%--  <div class="form-group">
-                                    <label class="control-label col-sm-4"  for="ddlCampFunding"> Funding:</label>
-                                    <div class="col-sm-8">
-                                         <select id="ddlCampFunding" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Funding--</option>
-                                        </select>
-
-                                    </div>
-                                </div>--%>
-
-
-
                                 <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtFirstName">First Name:</label>
                                     <div class="col-sm-8">
@@ -136,29 +97,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4" for="txtAmount">Voucher Amount:</label>
+                                    <label class="control-label col-sm-4" for="txtAmount">Product:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" maxlength="100" class="form-control NumericOnly" id="txtAmount" name="txtAmount" placeholder="Voucher Amount" required>
+                                        <input type="text" maxlength="100" class="form-control NumericOnly" id="txtAmount" name="txtAmount" placeholder="Product" required>
                                     </div>
-                                </div>
-                                <%-- <div class="form-group">
-                                    <label class="control-label col-sm-4" for="ddlInclProduct">Include Product:</label>
-                                    <div class="col-sm-8">
-                                        <select id="ddlInclProduct" multiple="multiple">
-                                         
-                                        </select>
-
-                                  <input type="text" class="form-control" id="ddlInclProduct" name="ddlInclProduct" placeholder="Inc. product" >
-                                    </div>
-                                </div>--%>
-                                <%-- <div class="form-group">
-                                    <label class="control-label col-sm-4" for="ddlExclProduct">Exclude Product:</label>
-                                    <div class="col-sm-8">
-                                     <select id="ddlExclProduct" multiple="multiple">
-                                        </select>                         
-
-                                    </div>
-                                </div>--%>
+                                </div>                             
                                 <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtExpiryDate">Expiry Date:</label>
                                     <div class="col-sm-8">
@@ -166,18 +109,11 @@
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="form-group" id="StatusShow">
                                     <label class="control-label col-sm-4" for="chkStatus">
                                         <label id="lblStatusText"></label>
                                         :</label>
-                                    <div class="col-sm-8">
-                                        <%--                                        <div class="checkbox-container">
-                                            <input type="checkbox" id="on-off-switch" name="chkStatus" checked>
-                                        </div>--%>
-
+                                    <div class="col-sm-8">                                     
                                         <div id="lblSwitch" class="make-switch switch-small">
                                             <input type="checkbox" name="chkStatus" data-on-text="Yes" data-off-text="No" checked />
                                         </div>
@@ -223,12 +159,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
-
-
 
                         <div class="modal-footer">
                             <div class="row">
@@ -240,7 +172,6 @@
                                     <button id="btnCancel" type="button" class="btn btn-default" onclick="hideModel()">Cancel</button>
                                 </div>
                             </div>
-
                         </div>
                     </form>
 
@@ -251,12 +182,9 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ctlscript" runat="Server">
-
     <script src="Pages/VO.js"></script>
 
-
     <script type="text/javascript">
-
 
         // To delete data entry for Voucher type
         function DeleteEntry(editid) {

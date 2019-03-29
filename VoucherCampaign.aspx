@@ -3,13 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContainer" runat="Server">
     <%--    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">--%>
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
     <script type="text/javascript" src="js/jquery.min.js"></script>
-
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <link href="css/editor.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="DataTable/jquery-1.12.3.min.js"> </script>
-
     <script src="js/editor.js"></script>
 
     <div class="row">
@@ -51,8 +48,6 @@
                             <th class="col-md-1">Product</th>
                             <th class="col-md-1">StartDate</th>
                             <th class="col-md-1">EndDate</th>
-                           <%-- <th class="col-md-1">DepartDate</th>
-                            <th class="col-md-1">ReturnDate</th>--%>
                             <th class="col-md-1">Status</th>
                             <th class="col-md-1">Actions</th>
                         </tr>
@@ -60,9 +55,7 @@
                     <tbody></tbody>
                 </table>
             </div>
-
         </div>
-
 
         <script>
             var currPage = "module<%=moduleId%>";
@@ -114,15 +107,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <%--  <div class="form-group">
-                                    <label class="control-label col-sm-4" for="ddlCampFunding">Funding:</label>
-                                    <div class="col-sm-8">
-                                        <select id="ddlCampFunding" class="select2 form-control" style="width: 100%">
-                                            <option value="-1">--Select Funding--</option>
-                                        </select>
-                                    </div>
-                                </div>--%>
-
                                 <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtCampName">Campaign Name:</label>
                                     <div class="col-sm-8">
@@ -138,30 +122,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <%--     <div class="form-group">
-                                    <label class="control-label col-sm-4" for="ddlInclProduct">Include Product:</label>
-                                    <div class="col-sm-8">
-                                        <select id="ddlInclProduct" multiple="multiple">
-                                            <option value="1">Option 1</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                            <option value="4">Option 4</option>
-                                            <option value="5">Option 5</option>
-                                            <option value="6">Option 6</option>
-                                        </select>
 
-                                       
-                                    </div>
-                                </div>--%>
-                                <%--    <div class="form-group">
-                                    <label class="control-label col-sm-4" for="ddlExclProduct">Exclude Product:</label>
-                                    <div class="col-sm-8">
-                                        <select id="ddlExclProduct" multiple="multiple">
-                                           
-                                        </select>
-
-                                    </div>
-                                </div>--%>
                                 <div class="form-group">
                                     <label class="control-label col-sm-4" for="txtStartDate">Start Date:</label>
                                     <div class="col-sm-8">
@@ -176,26 +137,10 @@
                                     </div>
                                 </div>
 
-                                <%--                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="txtDepartDate">Departure Date:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control datepicker DepartDate" id="txtDepartDate" name="txtDepartDate" value="" required />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="txtReturnDate">Return Date:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control datepicker ReturnDate" id="txtReturnDate" name="txtReturnDate" value="2099-12-31" required />
-                                    </div>
-                                </div>--%>
-
-
                                 <div class="form-group">
                                     <label class="control-label col-sm-4" for="txthtmlEng">htmlEnglish:</label>
                                     <div class="col-sm-8">
                                         <div id="txtEngEditor"></div>
-
                                     </div>
                                 </div>
 
@@ -203,7 +148,6 @@
                                     <label class="control-label col-sm-4" for="txthtmlFr">htmlFrench:</label>
                                     <div class="col-sm-8">
                                         <div id="txtFrEditor"></div>
-
                                     </div>
                                 </div>
 
@@ -229,23 +173,13 @@
                                         <label id="lblStatusText"></label>
                                         :</label>
                                     <div class="col-sm-8">
-                                        <%--                                        <div class="checkbox-container">
-                                            <input type="checkbox" id="on-off-switch" name="chkStatus" checked>
-                                        </div>--%>
-
                                         <div id="lblSwitch" class="make-switch switch-small">
                                             <input type="checkbox" name="chkStatus" data-on-text="Yes" data-off-text="No" checked />
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
-
-
-
-
                         <div class="modal-footer">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -256,10 +190,8 @@
                                     <button id="btnCancel" type="button" class="btn btn-default" onclick="hideModel()">Cancel</button>
                                 </div>
                             </div>
-
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -267,13 +199,8 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ctlscript" runat="Server">
-
     <script src="Pages/VC.js"></script>
-
     <script type="text/javascript">
-
-
-
         // To delete data entry for coupon type
         function DeleteEntry(editid) {
             $("#lblError").hide();
@@ -304,18 +231,12 @@
 
                         }
                     });
-
                 });
-
 
             $('#mdlCreate .close').click();
         }
-
-
-
         // Bind Coupon Type Listing
         function BindTable() {
-
             $("#tblVoucherCampList").dataTable().fnDestroy();
             $.ajax({
                 type: "POST",
@@ -338,8 +259,6 @@
                             { data: "CouponValue" },
                             { data: "StartDate" },
                             { data: "EndDate" },
-                            //{ data: "DepartDate" },
-                            //{ data: "ReturnDate" },
                             { data: "Status" },
                             {
                                 data: 'Id', "bSearchable": true, "bSortable": true, "mRender": function (data, type, data) {
@@ -350,15 +269,11 @@
         {%><a href="#" title="Delete" onclick="DeleteEntry(' + data.Id + ')"><img src="/imgs/icon_portal_delete.png" class="actionIcon"/></a><%}%> ';
                                 }
                             }
-
                         ]
-
-
                     });
                 }
             });
         }
-
     </script>
 </asp:Content>
 

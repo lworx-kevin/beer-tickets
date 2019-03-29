@@ -1,3 +1,19 @@
+----- Table columns need to delete ----
+
+VoucherMaster -- Table 
+       --[TypeId]  
+       --[FundingId]  
+       --[CategoryId]  
+       --[BrandId]  
+       --[incProduct]
+       --[exclProduct]
+
+VoucherCampaign -- table 
+ --FundingId  
+
+
+
+
 ------------------------                  Task 1   -----------------------------------------
 
 -- Change Categories to Types

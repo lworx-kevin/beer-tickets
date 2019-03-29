@@ -5,7 +5,7 @@ function CreateNew(editid, view) {
     $('#lblStatusText').show();
 
     var $select = $('#lblStatusText');
-    $select.text("WAITING");
+    $select.text("APPROVED");
     $("[name='chkStatus']").bootstrapSwitch('state', true);
     $("[name='chkStatus']").bootstrapSwitch('disabled', true);
     $('#frmMaster')[0].reset();
@@ -17,36 +17,24 @@ function CreateNew(editid, view) {
     $("#EntryMode").val('Add');
     $("#mdlCreate").attr("data-edit", "Add");
     $("#mdlCreate").attr("data-id", 0);
-
     $("#VoucherBlock").hide();
-    //$("#drpStatus").val(0);
     $("#dverror").empty();
-
-
     $("#ddlVoucCamp").val(0).trigger('change');
-
     $('#mdlCreate').modal('show');
 }
 
 function ValidateVoucher(editid, view) {
     $("#lblError").hide();
     var $select = $('#lblStatusText');
-
     $select.show();
-
-
     $('#StatusShow').show();
     $("#lblentrymode").html("Promote");
     $("#frmMaster :input").prop("disabled", false);
-
     $("#btnSubmit").show();
-
-    //$("#lblentrymode").html("Modify");
     $("#dverror").empty();
     $("#EntryMode").val('Promote');
     $("#mdlCreate").attr("data-edit", "validate");
     $("#mdlCreate").attr("data-id", editid);
-
     var json;
     $.ajax({
         type: "POST",
@@ -57,20 +45,10 @@ function ValidateVoucher(editid, view) {
         async: true,
         cache: false,
         success: function (res) {
-
             var json = eval(res.d);
-
-
-
-            //$("#ddlCampType").val(json[0].CouponTypeId).trigger('change');
-            //$("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
-            //$("#ddlCampCat").val(json[0].CouponCatId).trigger('change');
-            //$("#ddlCampBrand").val(json[0].CouponBrandId).trigger('change');
             $select.text("VALID");
             $("[name='chkStatus']").bootstrapSwitch('state', json[0].Status == "VALID" ? true : false);
             $("[name='chkStatus']").bootstrapSwitch('disabled', false);
-
-
             $("#ddlVoucCamp").val(json[0].CampaignId).trigger('change');
             $("#txtFirstName").val(json[0].FirstName);
             $("#txtLastName").val(json[0].LastName);
@@ -122,17 +100,14 @@ function ValidateVoucher(editid, view) {
                 $("#UseTaxes").hide();
             }
         }
-
     });
     $('#mdlCreate').modal('show');
 }
 
 //When edit/view is Clicked
 function EditEntry(editid, view) {
-
     $("#lblError").hide();
     var $select = $('#lblStatusText');
-
     $("#mdlCreate").attr("data-id", '');
     $("#mdlCreate").attr("data-id", editid);
     $("[name='chkStatus']").bootstrapSwitch('disabled', false);
@@ -148,16 +123,7 @@ function EditEntry(editid, view) {
         async: true,
         cache: false,
         success: function (res) {
-
             json = JSON.parse(res.d);
-
-            //$("#ddlCampType").val(json[0].CouponTypeId).trigger('change');
-            //$("#ddlCampFunding").val(json[0].CouponFundingId).trigger('change');
-            //$("#ddlCampCat").val(json[0].CouponCatId).trigger('change');
-            //$("#ddlCampBrand").val(json[0].CouponBrandId).trigger('change');
-
-
-
             $("#ddlVoucCamp").val(json[0].CampaignId).trigger('change');
             $("#txtFirstName").val(json[0].FirstName);
             $("#txtLastName").val(json[0].LastName);
@@ -210,13 +176,7 @@ function EditEntry(editid, view) {
                 $("#UseTaxes").hide();
             }
 
-
-
-
-
-
             if (view == 1) {
-
                 $("#lblentrymode").html("View");
                 $("#frmMaster :input").prop("disabled", true);
                 $("#btnSubmit").hide();
@@ -237,20 +197,13 @@ function EditEntry(editid, view) {
                 $("#btnSubmit").show();
                 $("#EntryMode").val('Edit');
                 $("#mdlCreate").attr("data-edit", "edit");
-
-
             }
         }
-
     });
-
     $('#mdlCreate').modal('show');
-
 }
 
-
 function BindMultiSelect() {
-
     // Bind Voucher Brand
     var $b = $('#ddlExclProduct');
     $.ajax({
@@ -262,25 +215,14 @@ function BindMultiSelect() {
         async: true,
         cache: false,
         success: function (msg) {
-
             json = JSON.parse(msg.d);
             $b.empty();
-
-
-
             for (var i = 0; i < json.length; i++) {
                 $b.append("<option value=" + json[i].Id + ">" + json[i].ProductName + "</option>").trigger('change');
             }
             $b.multiselect('rebuild');
-
-            //$b.append("<option value=0>--Select Product--</option>");
-            //for (var i = 0; i < json.length ; i++) {
-            //    $b.append("<li value=" + json[i].Id + ">" + json[i].ProductName + "</li>").trigger('change');
-            // }
         }
     });
-
-
 }
 
 //When cancel is Clicked
@@ -290,7 +232,6 @@ function hideModel() {
 }
 // To save data entry for Voucher type
 function SaveEntry() {
-
     $("#lblError").hide();
     waitingDialog.show("Saving  Data Please Wait..");
     $.ajaxSetup({
@@ -302,9 +243,7 @@ function SaveEntry() {
     var FirstName = $("#txtFirstName").val();
     var LastName = $("#txtLastName").val();
     var Amount = $("#txtAmount").val();
-    var Status = 'WAITING';
-
-
+    var Status = 'APPROVED';
     var Action = $("#mdlCreate").attr("data-edit");
     if (Validate()) {
         var url = '';
@@ -315,68 +254,42 @@ function SaveEntry() {
                 'CampaignId': VoucherCamp,
                 'FirstName': FirstName,
                 'LastName': LastName,
-                //'CouponTypeId': CouponType,
-                //'CouponFundingId': CouponFunding,
-                //'CouponCatId': CouponCat,
-                //'CouponBrandId': CouponBrand,
                 'VoucherAmount': Amount,
                 'Status': 'VALID',
-                //'IncProduct': InclProduct.toString(),
-                //'ExclProduct': ExclProduct.toString(),
                 'Id': $("#mdlCreate").attr("data-id"),
                 'Action': $("#mdlCreate").attr("data-edit")
             }
 
         }
         else if (Action == 'edit') {
-
             url = 'Vouchers.aspx/InsertVoucher';
             var Voucher = {
                 'ExpiryDate': ExpiryDate,
                 'CampaignId': VoucherCamp,
                 'FirstName': FirstName,
                 'LastName': LastName,
-                //'CouponTypeId': CouponType,
-                //'CouponFundingId': CouponFunding,
-               // 'CouponCatId': CouponCat,
-                //'CouponBrandId': CouponBrand,
-
                 'VoucherAmount': Amount,
-                'Status': 'WAITING',
+                'Status': 'APPROVED',
                 'IncProduct': InclProduct.toString(),
                 'ExclProduct': ExclProduct.toString(),
                 'Id': $("#mdlCreate").attr("data-id"),
                 'Action': $("#mdlCreate").attr("data-edit")
             }
-
         }
 
         else {
-
             url = 'Vouchers.aspx/InsertVoucher';
-
             var Voucher = {
-
                 'ExpiryDate': ExpiryDate,
                 'CampaignId': VoucherCamp,
                 'FirstName': FirstName,
                 'LastName': LastName,
-                //'CouponTypeId': CouponType,
-                //'CouponFundingId': CouponFunding,
-                //'CouponCatId': CouponCat,
-                //'CouponBrandId': CouponBrand,
-
                 'VoucherAmount': Amount,
-                'Status': 'WAITING',
-                //'IncProduct': InclProduct.toString(),
-                //'ExclProduct': ExclProduct.toString(),
+                'Status': 'APPROVED',
                 'Id': 0,
                 'Action': 'Add'
             }
         }
-
-
-
         var dataToSend = JSON.stringify({ 'Voucher': Voucher });
 
         $.ajax({
@@ -388,9 +301,7 @@ function SaveEntry() {
             async: true,
             cache: false,
             success: function (msg) {
-
-                var data = eval(msg.d)
-
+                var data = eval(msg.d);
                 if (data == 'Success') {
                     $('#mdlCreate .close').click();
                     BindTable();
@@ -416,51 +327,21 @@ function SaveEntry() {
         $("#lblError").show()
         $("#lblError").html("Please enter value for Brand,Type,Category,Funding," + "<br/>" +
             "FirstName,LastName and Amount");
-
     }
     waitingDialog.hide();
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // To validate data entry for Voucher type
 function Validate() {
     if (
-
-        //$("#ddlCampBrand").val() == '0' ||
-
-
-        //$("#ddlCampType").val() == '0' ||
-        //$("#ddlCampCat").val() == '0' ||
-        //$("#ddlCampFunding").val() == '0' ||
-
         $("#txtFirstName").val() == '' ||
         $("#txtLastName").val() == '' ||
         $("#txtAmount").val() == '') {
         return false;
-    }
-    else {
-        return true;
-    }
-    if ($("#ddlVoucCamp").val() <= 0
-        //&& $("#ddlCampCat").val() <= 0
-
-    ) {
+    }  
+    if ($("#ddlVoucCamp").val() <= 0) {
         $("#lblError").show();
         return false;
-    }
-    else {
-        return true;
     }
     return true;
 }
@@ -483,37 +364,26 @@ function onlyAlphabets(e, t) {
     }
 }
 
-
 $(document).ready(function () {
     $("#lblError").hide();
     BindTable();
     BindDropdown();
     BindMultiSelect();
-
     $(function () {
         $('.NumericOnly').keypress(function (event) {
             return isNumber(event, this);
         });
     });
 
-
     function isNumber(evt, element) {
-
-        var charCode = (evt.which) ? evt.which : event.keyCode
-
+        var charCode = (evt.which) ? evt.which : event.keyCode;
         if (
             (charCode != 45 || $(element).val().indexOf('-') != -1) &&      // “-” CHECK MINUS, AND ONLY ONE.
             (charCode != 46 || $(element).val().indexOf('.') != -1) &&      // “.” CHECK DOT, AND ONLY ONE.
             (charCode < 48 || charCode > 57))
             return false;
-
         return true;
     }
-
-
-    //Bind Voucher 
-
-
 });
 
 function BindDropdown() {
@@ -536,16 +406,4 @@ function BindDropdown() {
             }
         }
     });
-
-
-
-
-
-
-
-
-    
-
-
-
 }
