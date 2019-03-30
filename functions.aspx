@@ -11,11 +11,7 @@
     <div class="row bd_panel">
            <%=sB.ToString() %>
   		</div>
-    <script>
+    <script> 
         var currPage = "module<%=module_id%>";
-
     </script>
 </asp:Content>
-
-
-
